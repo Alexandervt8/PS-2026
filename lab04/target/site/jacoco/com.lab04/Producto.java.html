@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Producto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Pruebas Unitarias con JUnit 5</a> &gt; <a href="index.source.html" class="el_package">com.lab04</a> &gt; <span class="el_source">Producto.java</span></div><h1>Producto.java</h1><pre class="source lang-java linenums">package com.lab04;
+
+import java.util.Objects;
+
+public class Producto {
+    private final String id;
+    private final String nombre;
+    private final double precio;
+    private final boolean disponible;
+
+<span class="fc" id="L11">    public Producto(String id, String nombre, double precio, boolean disponible) {</span>
+<span class="pc bpc" id="L12" title="2 of 4 branches missed.">        if (id == null || id.isBlank()) {</span>
+<span class="nc" id="L13">            throw new IllegalArgumentException(&quot;El id del producto no puede ser vacío&quot;);</span>
+        }
+<span class="pc bpc" id="L15" title="2 of 4 branches missed.">        if (nombre == null || nombre.isBlank()) {</span>
+<span class="nc" id="L16">            throw new IllegalArgumentException(&quot;El nombre del producto no puede ser vacío&quot;);</span>
+        }
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if (precio &lt; 0) {</span>
+<span class="nc" id="L19">            throw new IllegalArgumentException(&quot;El precio no puede ser negativo&quot;);</span>
+        }
+<span class="fc" id="L21">        this.id = id;</span>
+<span class="fc" id="L22">        this.nombre = nombre;</span>
+<span class="fc" id="L23">        this.precio = precio;</span>
+<span class="fc" id="L24">        this.disponible = disponible;</span>
+<span class="fc" id="L25">    }</span>
+
+<span class="fc" id="L27">    public String getId() { return id; }</span>
+<span class="fc" id="L28">    public String getNombre() { return nombre; }</span>
+<span class="fc" id="L29">    public double getPrecio() { return precio; }</span>
+<span class="fc" id="L30">    public boolean isDisponible() { return disponible; }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (!(o instanceof Producto producto)) return false;</span>
+<span class="nc" id="L36">        return Objects.equals(id, producto.id);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L41">        return Objects.hash(id);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

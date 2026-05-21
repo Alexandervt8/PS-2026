@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CarritoCompra.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Pruebas Unitarias con JUnit 5</a> &gt; <a href="index.source.html" class="el_package">com.lab04</a> &gt; <span class="el_source">CarritoCompra.java</span></div><h1>CarritoCompra.java</h1><pre class="source lang-java linenums">package com.lab04;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+public class CarritoCompra {
+    private final List&lt;ItemCarrito&gt; items;
+    private final List&lt;String&gt; historialOperaciones;
+    private final ServicioPrecio servicioPrecio;
+
+<span class="fc" id="L14">    public CarritoCompra(ServicioPrecio servicioPrecio) {</span>
+<span class="pc bpc" id="L15" title="1 of 2 branches missed.">        if (servicioPrecio == null) {</span>
+<span class="nc" id="L16">            throw new IllegalArgumentException(&quot;El servicio de precio es obligatorio&quot;);</span>
+        }
+<span class="fc" id="L18">        this.servicioPrecio = servicioPrecio;</span>
+<span class="fc" id="L19">        this.items = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">        this.historialOperaciones = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L21">    }</span>
+
+    public void agregarProducto(Producto producto, int cantidad) {
+<span class="fc" id="L24">        validarProductoYCantidad(producto, cantidad);</span>
+<span class="fc" id="L25">        Optional&lt;ItemCarrito&gt; existente = buscarItem(producto.getId());</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (existente.isPresent()) {</span>
+<span class="fc" id="L27">            existente.get().actualizarCantidad(existente.get().getCantidad() + cantidad);</span>
+<span class="fc" id="L28">            registrar(&quot;Producto duplicado actualizado: &quot; + producto.getNombre());</span>
+        } else {
+<span class="fc" id="L30">            items.add(new ItemCarrito(producto, cantidad));</span>
+<span class="fc" id="L31">            registrar(&quot;Producto agregado: &quot; + producto.getNombre());</span>
+        }
+<span class="fc" id="L33">    }</span>
+
+    public void actualizarCantidad(String idProducto, int nuevaCantidad) {
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (nuevaCantidad &lt;= 0) {</span>
+<span class="nc" id="L37">            throw new IllegalArgumentException(&quot;La cantidad debe ser positiva&quot;);</span>
+        }
+<span class="fc" id="L39">        ItemCarrito item = buscarItem(idProducto)</span>
+<span class="fc" id="L40">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Producto no encontrado en el carrito&quot;));</span>
+<span class="fc" id="L41">        item.actualizarCantidad(nuevaCantidad);</span>
+<span class="fc" id="L42">        registrar(&quot;Cantidad actualizada para producto: &quot; + idProducto);</span>
+<span class="fc" id="L43">    }</span>
+
+    public void removerProducto(String idProducto) {
+<span class="fc" id="L46">        boolean removido = items.removeIf(item -&gt; item.getProducto().getId().equals(idProducto));</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (!removido) {</span>
+<span class="fc" id="L48">            throw new IllegalArgumentException(&quot;Producto no encontrado en el carrito&quot;);</span>
+        }
+<span class="fc" id="L50">        registrar(&quot;Producto removido: &quot; + idProducto);</span>
+<span class="fc" id="L51">    }</span>
+
+    public void vaciar() {
+<span class="fc" id="L54">        items.clear();</span>
+<span class="fc" id="L55">        registrar(&quot;Carrito vaciado&quot;);</span>
+<span class="fc" id="L56">    }</span>
+
+    public double calcularSubtotal() {
+<span class="fc" id="L59">        return items.stream().mapToDouble(ItemCarrito::obtenerSubtotal).sum();</span>
+    }
+
+    public double calcularTotal() {
+<span class="fc" id="L63">        double subtotal = calcularSubtotal();</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (subtotal == 0) {</span>
+<span class="fc" id="L65">            return 0;</span>
+        }
+<span class="fc" id="L67">        double descuento = servicioPrecio.calcularDescuento(subtotal);</span>
+<span class="fc" id="L68">        double montoConDescuento = subtotal - descuento;</span>
+<span class="fc" id="L69">        double impuesto = servicioPrecio.calcularImpuesto(montoConDescuento);</span>
+<span class="fc" id="L70">        return montoConDescuento + impuesto;</span>
+    }
+
+    public String obtenerResumenCompra() {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (items.isEmpty()) {</span>
+<span class="fc" id="L75">            return &quot;Carrito vacío&quot;;</span>
+        }
+<span class="fc" id="L77">        StringBuilder resumen = new StringBuilder(&quot;Resumen de compra:\n&quot;);</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (ItemCarrito item : items) {</span>
+<span class="fc" id="L79">            resumen.append(item.getProducto().getNombre())</span>
+<span class="fc" id="L80">                    .append(&quot; x &quot;).append(item.getCantidad())</span>
+<span class="fc" id="L81">                    .append(&quot; = &quot;).append(item.obtenerSubtotal())</span>
+<span class="fc" id="L82">                    .append(&quot;\n&quot;);</span>
+<span class="fc" id="L83">        }</span>
+<span class="fc" id="L84">        resumen.append(&quot;Subtotal: &quot;).append(calcularSubtotal())</span>
+<span class="fc" id="L85">               .append(&quot;\nTotal: &quot;).append(calcularTotal());</span>
+<span class="fc" id="L86">        return resumen.toString();</span>
+    }
+
+    public boolean contieneProducto(String idProducto) {
+<span class="fc" id="L90">        return buscarItem(idProducto).isPresent();</span>
+    }
+
+    public int obtenerCantidadItems() {
+<span class="fc" id="L94">        return items.size();</span>
+    }
+
+    public int obtenerCantidadProducto(String idProducto) {
+<span class="fc" id="L98">        return buscarItem(idProducto).map(ItemCarrito::getCantidad).orElse(0);</span>
+    }
+
+    public List&lt;ItemCarrito&gt; getItems() {
+<span class="nc" id="L102">        return Collections.unmodifiableList(items);</span>
+    }
+
+    public List&lt;String&gt; getHistorialOperaciones() {
+<span class="fc" id="L106">        return Collections.unmodifiableList(historialOperaciones);</span>
+    }
+
+    private Optional&lt;ItemCarrito&gt; buscarItem(String idProducto) {
+<span class="fc" id="L110">        return items.stream()</span>
+<span class="fc" id="L111">                .filter(item -&gt; item.getProducto().getId().equals(idProducto))</span>
+<span class="fc" id="L112">                .findFirst();</span>
+    }
+
+    private void validarProductoYCantidad(Producto producto, int cantidad) {
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (producto == null) {</span>
+<span class="nc" id="L117">            throw new IllegalArgumentException(&quot;El producto no puede ser nulo&quot;);</span>
+        }
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (!producto.isDisponible()) {</span>
+<span class="fc" id="L120">            throw new IllegalArgumentException(&quot;No se puede agregar un producto indisponible&quot;);</span>
+        }
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (cantidad &lt;= 0) {</span>
+<span class="fc" id="L123">            throw new IllegalArgumentException(&quot;La cantidad debe ser positiva&quot;);</span>
+        }
+<span class="fc" id="L125">    }</span>
+
+    private void registrar(String operacion) {
+<span class="fc" id="L128">        historialOperaciones.add(LocalDateTime.now() + &quot; - &quot; + operacion);</span>
+<span class="fc" id="L129">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
