@@ -1,4 +1,4 @@
-"""
+/*
 ===========================================================
 ASIGNATURA:        PRUEBAS DE SOFTWARE
 TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
@@ -24,7 +24,7 @@ pruebas parametrizadas, clases anidadas (@Nested) y mocks
 de Mockito para simular el comportamiento de servicios 
 externos y garantizar independencia entre pruebas.
 ===========================================================
-"""
+*/
 
 package com.lab04;
 

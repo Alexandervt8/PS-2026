@@ -1,4 +1,4 @@
-"""
+/*
 ===========================================================
 ASIGNATURA:        PRUEBAS DE SOFTWARE
 TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
@@ -22,7 +22,7 @@ Mockito durante las pruebas unitarias, simulando servicios
 externos de cálculo de precios sin depender de implementaciones 
 reales.
 ===========================================================
-"""
+*/
 
 package com.lab04;
 

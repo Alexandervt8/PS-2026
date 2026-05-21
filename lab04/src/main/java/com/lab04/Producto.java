@@ -1,4 +1,4 @@
-"""
+/*
 ===========================================================
 ASIGNATURA:        PRUEBAS DE SOFTWARE
 TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
@@ -23,7 +23,7 @@ precios negativos. También redefine los métodos equals() y
 hashCode() para facilitar la comparación de productos dentro 
 del carrito de compras.
 ===========================================================
-"""
+*/
 
 package com.lab04;
 

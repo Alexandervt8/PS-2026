@@ -1,4 +1,4 @@
-"""
+/*
 ===========================================================
 ASIGNATURA:        PRUEBAS DE SOFTWARE
 TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
@@ -22,7 +22,7 @@ multiplicando el precio del producto por la cantidad
 seleccionada. Además, valida que las cantidades ingresadas 
 sean siempre positivas.
 ===========================================================
-"""
+*/
 
 package com.lab04;
 

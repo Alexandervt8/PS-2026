@@ -1,4 +1,4 @@
-"""
+/*
 ===========================================================
 ASIGNATURA:        PRUEBAS DE SOFTWARE
 TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
@@ -24,7 +24,7 @@ inválidas y detecta productos duplicados dentro del carrito.
 Adicionalmente, mantiene un historial de operaciones y genera 
 un resumen detallado de la compra realizada.
 ===========================================================
-"""
+*/
 
 package com.lab04;
 
