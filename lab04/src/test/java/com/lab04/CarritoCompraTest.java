@@ -1,3 +1,31 @@
+"""
+===========================================================
+ASIGNATURA:        PRUEBAS DE SOFTWARE
+TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
+N° PRÁCTICA:       04
+AÑO LECTIVO:       2026
+SEMESTRE:          VII
+FECHA ENTREGA:     15/05/2026
+
+INTEGRANTES:
+- Quispe Flores Marco Ramiro
+- Quispe Madariaga Jeferson Jofre
+- Ramirez Ccahuana Max Edu
+- Valdiviezo Tovar Alexander
+
+DESCRIPCIÓN:
+Este archivo contiene las pruebas unitarias desarrolladas 
+para verificar el correcto funcionamiento del sistema de 
+carrito de compras utilizando JUnit 5 y Mockito. Las pruebas 
+cubren operaciones básicas del carrito, validaciones de 
+productos y cantidades, cálculo de impuestos y descuentos, 
+casos límite y manejo de excepciones. Además, se emplean 
+pruebas parametrizadas, clases anidadas (@Nested) y mocks 
+de Mockito para simular el comportamiento de servicios 
+externos y garantizar independencia entre pruebas.
+===========================================================
+"""
+
 package com.lab04;
 
 import org.junit.jupiter.api.BeforeEach;
