@@ -1,3 +1,31 @@
+"""
+===========================================================
+ASIGNATURA:        PRUEBAS DE SOFTWARE
+TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
+N° PRÁCTICA:       04
+AÑO LECTIVO:       2026
+SEMESTRE:          VII
+FECHA ENTREGA:     15/05/2026
+
+INTEGRANTES:
+- Quispe Flores Marco Ramiro
+- Quispe Madariaga Jeferson Jofre
+- Ramirez Ccahuana Max Edu
+- Valdiviezo Tovar Alexander
+
+DESCRIPCIÓN:
+Este archivo implementa la clase principal CarritoCompra, 
+encargada de gestionar todas las operaciones relacionadas 
+con el carrito de compras de la tienda en línea. La clase 
+permite agregar, remover y actualizar productos, calcular 
+subtotales, descuentos, impuestos y el total final de la 
+compra. También valida productos indisponibles, cantidades 
+inválidas y detecta productos duplicados dentro del carrito. 
+Adicionalmente, mantiene un historial de operaciones y genera 
+un resumen detallado de la compra realizada.
+===========================================================
+"""
+
 package com.lab04;
 
 import java.time.LocalDateTime;

@@ -1,3 +1,30 @@
+"""
+===========================================================
+ASIGNATURA:        PRUEBAS DE SOFTWARE
+TÍTULO:            Pruebas Unitarias con JUnit 5 y Mockito
+N° PRÁCTICA:       04
+AÑO LECTIVO:       2026
+SEMESTRE:          VII
+FECHA ENTREGA:     15/05/2026
+
+INTEGRANTES:
+- Quispe Flores Marco Ramiro
+- Quispe Madariaga Jeferson Jofre
+- Ramirez Ccahuana Max Edu
+- Valdiviezo Tovar Alexander
+
+DESCRIPCIÓN:
+Este archivo implementa la clase Producto, utilizada para 
+representar los productos disponibles en la tienda en línea. 
+La clase almacena información como id, nombre, precio y estado 
+de disponibilidad del producto. Además, incorpora validaciones 
+para evitar datos inválidos, como identificadores vacíos o 
+precios negativos. También redefine los métodos equals() y 
+hashCode() para facilitar la comparación de productos dentro 
+del carrito de compras.
+===========================================================
+"""
+
 package com.lab04;
 
 import java.util.Objects;
