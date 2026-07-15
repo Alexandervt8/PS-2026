@@ -1,0 +1,17 @@
+{
+  "name": "lab08-biblioteca-musical",
+  "version": "1.0.0",
+  "description": "Laboratorio 08 - Pruebas de integracion con Supertest y Jest",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
