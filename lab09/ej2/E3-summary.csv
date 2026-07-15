@@ -1,0 +1,3 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
+GET - Listar reservas,1500,4,2,12,1.33,0.000%,50.34402,43.71,7.42,889.0
+TOTAL,1500,4,2,12,1.33,0.000%,50.34402,43.71,7.42,889.0
