@@ -1,3 +1,30 @@
+/*
+===========================================================
+ASIGNATURA:        PRUEBAS DE SOFTWARE
+TÍTULO:            Pruebas de Rendimiento y Seguridad en API REST
+N° PRÁCTICA:       09
+AÑO LECTIVO:       2026
+SEMESTRE:          VII
+FECHA ENTREGA:     16/07/2026
+
+INTEGRANTES:
+- Quispe Flores Marco Ramiro
+- Quispe Madariaga Jeferson Jofre
+- Ramirez Ccahuana Max Edu
+- Valdiviezo Tovar Alexander
+
+DESCRIPCIÓN:
+Este archivo implementa pruebas de carga en k6 sobre el endpoint GET /reservas
+de la API de reservas hoteleras. Permite ejecutar tres escenarios configurables
+de 20, 50 y 100 usuarios virtuales, con sus respectivos periodos de Ramp-Up e
+iteraciones por usuario.
+
+El script verifica que las solicitudes respondan con el código HTTP 200 y que
+el contenido retornado se encuentre en formato JSON. También establece umbrales
+para controlar el tiempo de respuesta y el porcentaje de solicitudes fallidas.
+===========================================================
+*/
+
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import exec from 'k6/execution';
